@@ -9,6 +9,7 @@ import "core:math/bits"
 import "core:strings"
 
 Values :: struct {
+  show_menu          : bool,
 	brightness_factor  : f32 `15`, // Higher = brighter
 	star_range_indices : f32 `10`, // Higher = more random looking, comp expensive
   level_depth        : f32 `6`,  // Higher = more (faint) stars, comp expensive

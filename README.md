@@ -1,1 +1,1 @@
-# stars
+# stars using hashFnv32()
