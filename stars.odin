@@ -10,10 +10,10 @@ import "core:strings"
 
 Values :: struct {
   show_menu          : bool,
-	brightness_factor  : f32 `15`, // Higher = brighter
-	star_range_indices : f32 `10`, // Higher = more random looking, comp expensive
+  brightness_factor  : f32 `15`, // Higher = brighter
+  star_range_indices : f32 `10`, // Higher = more random looking, comp expensive
   level_depth        : f32 `6`,  // Higher = more (faint) stars, comp expensive
-	star_density       : f32 `2`,  // Higher = more stars (2-3), comp expensive
+  star_density       : f32 `2`,  // Higher = more stars (2-3), comp expensive
 }
 
 MAX_INT :: bits.I32_MAX
@@ -32,7 +32,7 @@ hashFnv32 :: proc(s : string) -> i32 {
 
   for i, l := 0, len(s); i < l; i+=1 {
     hval ~=  cast(i32)s[i]
-    hval += (hval << 1) + (hval << 4) + (hval << 7) + (hval << 8) +	(hval << 24)
+    hval += (hval << 1) + (hval << 4) + (hval << 7) + (hval << 8) +   (hval << 24)
   }
   return hval
 }

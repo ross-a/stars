@@ -55,12 +55,11 @@ draw_menu :: proc(w, h: i32, values: ^stars.Values) {
     cstr = strings.clone_to_cstring(str)
     GuiTextBox(Rectangle{f32(w) - 185, 115, 160, 20}, cstr, 10, false)
     delete(cstr)
-    
   }
 }
 
 main :: proc() {
-	using raylib
+  using raylib
 
   ta := mem.Tracking_Allocator{}
   mem.tracking_allocator_init(&ta, context.allocator)
@@ -126,7 +125,7 @@ main :: proc() {
           delta.y = 0
           textColor = LIGHTGRAY
         }
-        
+
         gmwm : f32 = GetMouseWheelMove()
         if gmwm != 0.0 {
           mult : f32 = (gmwm > 0.5) ? 1.01 : (1 / 1.01)
@@ -134,7 +133,7 @@ main :: proc() {
           if (scale * f32(w) > MAX_INT) || (scale * f32(h) > MAX_INT) {
             scale = prev_scale
           }
-          
+
           e := GetMousePosition()
           pos.x += e.x * (1 - 1 / mult) / scale
           pos.y += e.y * (1 - 1 / mult) / scale
@@ -148,18 +147,18 @@ main :: proc() {
           prev_scale = scale
         }
       }
-      
+
       // Draw   ------------------------------
       BeginDrawing()
       ClearBackground(BLACK)
-      
+
       DrawText("Pan: hold left mouse button", 0, 0, 10, textColor)
       str := fmt.tprintf("%.0f %.0f %.3f", pos.x + delta.x, pos.y + delta.y, scale)
       cstr := strings.clone_to_cstring(str)
       DrawText(cstr, 0, 11, 10, textColor)
       DrawText("Zoom: scroll mouse wheel", 0, 22, 10, textColor)
       delete(cstr)
-      
+
       sync.lock(&s.mutex)
       for star in s.stars {
         a : u8 = cast(u8)(star.z * 255)
@@ -175,7 +174,7 @@ main :: proc() {
     }
 
     CloseWindow()
-    
+
     for ; !thread.is_done(star_data_thread); {}
     free(star_data_thread)
     stars.get_stars(nil, nil) // clean this procs statics
